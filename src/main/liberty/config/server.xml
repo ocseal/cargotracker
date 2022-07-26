@@ -116,7 +116,7 @@
     <properties.postgresql serverName="localhost" 
     portNumber="5432" 
     databaseName= "postgres" 
-    URL="jdbc:postgresql:mem:cargotrackerdatabase"
+    URL="jdbc:postgresql://localhost:5432/cargotrackerdatabase"
     user="${env.POSTGRES_USER}"
     password="${env.POSTGRES_PASSWORD}"/>
   </dataSource>

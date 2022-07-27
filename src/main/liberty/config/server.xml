@@ -116,9 +116,10 @@
     <properties.postgresql serverName="localhost" 
     portNumber="5432" 
     databaseName= "postgres" 
-    URL="jdbc:postgresql://localhost:5432/cargotrackerdatabase"
-    user="${env.POSTGRES_USER}"
-    password="${env.POSTGRES_PASSWORD}"/>
+    URL="jdbc:postgresql://localhost:5432/postgres"
+    user="admin"
+    password="adminpwd"
+    />
   </dataSource>
   
   <databaseStore id="EJBPersistentTimerStore" tablePrefix="WLP2_" keyGenerationStrategy="SEQUENCE"/>
@@ -132,6 +133,7 @@
 
   <databaseStore id="ejbTimerDataStore" keyGenerationStrategy="SEQUENCE"/>
   <dataSource id="DefaultDataSource" jdbcDriverRef="postgresDriver">
+  	<properties user="admin" password="adminpwd" URL="jdbc:postgresql://localhost:5432/postgres" />
   </dataSource>
   
   <ejbContainer>

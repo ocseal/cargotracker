@@ -10,12 +10,14 @@
     <feature>batch-1.0</feature>
   </featureManager> 
 
+  <!--
   <logging traceSpecification="*=info:EJBContainer=all:Injection*=all:com.ibm.websphere.jaxrs*=all:com.ibm.ws.jaxrs*=all:logservice*=all:org.apache.cxf.*=all:rarInstall*=all:WAS.j2c*=all:runtime.update*=all:resource*=all"
     traceFileName="trace.log"
     maxFileSize="0"
     maxFiles="0"
     traceFormat="BASIC" 
   />
+  -->
 
   <variable name="default.http.port" defaultValue="8080"/>
   <variable name="default.https.port" defaultValue="8081"/>
@@ -101,18 +103,15 @@
     destinationType="javax.jms.Queue"/>
   </jmsActivationSpec>
   
-  <jdbcDriver id="postgresDriver" libraryRef="postgresqlLib"/>
+  <jdbcDriver id="dbDriver" libraryRef="dbLib"/>
   
-  <!-- Currently, OL cannot find JDBC drivers when using variable substitution.
-  	   To work around this issue, replace the filler directory below with your unique file path. -->
-  
-  <library id="postgresqlLib">
-  	<fileset dir="/Users/chanun/postgres" includes="postgresql*.jar"/>
+  <library id="dbLib">
+  	<fileset dir="${env.HOME}" includes="postgresql*.jar"/>
   </library>
   
   <dataSource id="cargoTrackerDataStore" 
   	jndiName="jdbc/cargotrackerdatabase">
-  	<jdbcDriver libraryRef="postgresqlLib"/>
+  	<jdbcDriver libraryRef="dbLib"/>
     <properties.postgresql serverName="localhost" 
     portNumber="5432" 
     databaseName= "postgres" 
@@ -132,7 +131,7 @@
   </persistentExecutor>
 
   <databaseStore id="ejbTimerDataStore" keyGenerationStrategy="SEQUENCE"/>
-  <dataSource id="DefaultDataSource" jdbcDriverRef="postgresDriver">
+  <dataSource id="DefaultDataSource" jdbcDriverRef="dbDriver">
   	<properties user="admin" password="adminpwd" URL="jdbc:postgresql://localhost:5432/postgres" />
   </dataSource>
   
@@ -142,7 +141,7 @@
   </ejbContainer>
 
   <webApplication location="cargo-tracker.war" contextRoot="cargo-tracker">
-  	<classloader commonLibraryRef="postgresqlLib"/>
+  	<classloader commonLibraryRef="dbLib"/>
   	<web-bnd moduleName="cargo-tracker">
       <env-entry name="java:app/configuration/GraphTraversalUrl" value="http://localhost:8080/cargo-tracker/rest/graph-traversal/shortest-path"/>
   	</web-bnd>

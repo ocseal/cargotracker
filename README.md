@@ -35,20 +35,14 @@ The simplest steps are the following (no IDE required):
 To run using Maven with Open Liberty and PostgreSQL, follow these steps: 
 
 * Get the project source code and ensure that you have Docker installed. 
-* Download the PostgreSQL 42.4.0 JDBC driver .jar from [the PostgreSQL website](https://jdbc.postgresql.org/download.html) 
 * Ensure you are running Java SE 8 or Java SE 11 (IBM Semeru recommended with Open Liberty: https://developer.ibm.com/languages/java/semeru-runtimes/downloads/ -> "Java 11" from the version dropdown menu.
 * Make sure JAVA_HOME is set.
-* Navigate to the cargotracker directory and access the server.xml located in src/main/liberty/config.
-* Change the filler file path for the PostgreSQL library (Line 110) to your unique file path. 
 * Run the following Docker command to start the PostgreSQL Docker container: `docker run --name postgres-container -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=password -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=adminpwd -e POSTGRES_DB=postgres -d postgres:14.4`
-* Return to the cargotracker directory and run the application with Liberty Maven Plugin: `mvn -P openliberty liberty:dev -DserverStartTimeout=300`.
-
-_NOTE: OL currently cannot search for JDBC drivers using variable substitution. The user will be required to manually change the PostgreSQL .jar file path in the server.xml to their unique file path in order for the application to start._
+* Go to the cargotracker directory and run the application with Liberty Maven Plugin: `mvn -P openliberty liberty:dev -DserverStartTimeout=300`.
  
 You can safely ignore the shrinkwrap features warning, the AggregateObjectMapping nested foreign key warning, and the JMS listener warnings as these don’t affect the application functionality. 
 
 * The application should start without any additional errors and you can view it at http://localhost:8080/cargo-tracker. 
-
 
 To set up in Eclipse, follow these steps:
 

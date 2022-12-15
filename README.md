@@ -11,7 +11,7 @@ Hibernate and Jetty whereas the application is built on Jakarta EE.
 The application is an end-to-end system for keeping track of shipping cargo. It 
 has several interfaces described in the following sections.
 
-For further details on the project, please visit: https://eclipse-ee4j.github.io/cargotracker/.
+For further details on the project, please visit: https://eclipse-ee4j.github.io/cargotracker/ and for additional detailed instructions visit https://openliberty.io/blog/2022/08/24/open-liberty-with-cargo-tracker.html.
 
 A slide deck introducing the
 fundamentals of the project is available on the official Eclipse 
